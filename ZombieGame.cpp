@@ -1,4 +1,4 @@
-﻿#include <sstream>
+﻿
 #include <fstream>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
@@ -10,16 +10,11 @@
 #include"Item.h"
 #include <iostream>
 
-
 using namespace sf;
-Vector2f scaling(RenderWindow& window, float pos_x, float pos_y)
-{
-    Vector2u window_size = window.getSize();
-    float scale_x = static_cast<float>(window_size.x) / 1920.0f;
-    float scale_y = static_cast<float>(window_size.y) / 1080.0f;
 
-    return { pos_x * scale_x, pos_y * scale_y };
-}
+Vector2f scaling(RenderWindow& window, float pos_x, float pos_y);//масштабирование для разных экранов относительно 1920x1080
+
+
 int main()
 {
     bool wave_in_progress = true;
@@ -60,7 +55,7 @@ int main()
 
     Texture background_texture = Texture_Holder::get_texture("texture/background_sheet.png");
     VertexArray background;
-    
+
     int nums_of_z;
     int nums_of_alive_z;
     Zombie* zombies = nullptr;
@@ -86,9 +81,9 @@ int main()
 
     Texture game_over_txt = Texture_Holder::get_texture("texture/background.png");
     Sprite game_over_sprite(game_over_txt);
-    game_over_sprite.setPosition(Vector2f(0,0));
+    game_over_sprite.setPosition(Vector2f(0, 0));
     View hudWiew(FloatRect(Vector2f(0, 0), Vector2f(resolution.x, resolution.y)));
-    Texture ammo_icon= Texture_Holder::get_texture("texture/ammo_icon.png");
+    Texture ammo_icon = Texture_Holder::get_texture("texture/ammo_icon.png");
     Sprite ammo_icon_sprite(ammo_icon);
     ammo_icon_sprite.setPosition(scaling(window, 30, 980));
 
@@ -102,106 +97,106 @@ int main()
     pause_text.setString("Press Enter \nto continue");
 
     Text game_over_text(font);
-   game_over_text.setCharacterSize(125);
-   game_over_text.setFillColor(Color::White);
-   game_over_text.setPosition(scaling(window, 600, 540));
-   game_over_text.setString("Press Enter \nto play");
+    game_over_text.setCharacterSize(125);
+    game_over_text.setFillColor(Color::White);
+    game_over_text.setPosition(scaling(window, 600, 540));
+    game_over_text.setString("Press Enter \nto play");
 
-   Text level_up_text(font);
-  level_up_text.setCharacterSize(80);
-  level_up_text.setFillColor(Color::White);
-  level_up_text.setPosition(scaling(window, 150, 250));
-  level_up_text.setString("Press Enter \nto play");
-  std::stringstream level_up_stream;
-  level_up_stream <<
-      "1-povishenie skorostrelnosty" <<
-      "\n2-povishenie oboymi" <<
-      "\n3-povishenie HP" <<
-      "\n4-povishenie speed" <<
-      "\n5-povishenie aptechka" <<
-      "\n6-povishenie ammo";
-  level_up_text.setString(level_up_stream.str());
+    Text level_up_text(font);
+    level_up_text.setCharacterSize(80);
+    level_up_text.setFillColor(Color::White);
+    level_up_text.setPosition(scaling(window, 150, 250));
+    level_up_text.setString("Press Enter \nto play");
+    std::stringstream level_up_stream;
+    level_up_stream <<
+        "1-Upgrade shooting speed" <<
+        "\n2-Upgrade clip" <<
+        "\n3-Upgrade HP" <<
+        "\n4-Upgrade speed" <<
+        "\n5-Upgrade med kit" <<
+        "\n6-Upgrade ammo";
+    level_up_text.setString(level_up_stream.str());
 
-  Text ammo_text(font);
-  ammo_text.setCharacterSize(55);
-  ammo_text.setFillColor(Color::White);
-  ammo_text.setPosition(scaling(window, 110, 980));
+    Text ammo_text(font);
+    ammo_text.setCharacterSize(55);
+    ammo_text.setFillColor(Color::White);
+    ammo_text.setPosition(scaling(window, 110, 980));
 
-  Text score_text(font);
- score_text.setCharacterSize(55);
- score_text.setFillColor(Color::White);
- score_text.setPosition(scaling(window, 20, 0));
+    Text score_text(font);
+    score_text.setCharacterSize(55);
+    score_text.setFillColor(Color::White);
+    score_text.setPosition(scaling(window, 20, 0));
 
- std::ifstream input_file("gamedata/score.txt");
+    std::ifstream input_file("gamedata/score.txt");
 
- if (input_file.is_open())
- {
-     input_file >> hi_score;
-     input_file.close();
- }
+    if (input_file.is_open())
+    {
+        input_file >> hi_score;
+        input_file.close();
+    }
 
-  Text hi_score_text(font);
-  hi_score_text.setCharacterSize(55);
-  hi_score_text.setFillColor(Color::White);
-  hi_score_text.setPosition(scaling(window, 1400, 0));
-  std::stringstream s;
-  s << "Hight score: " << hi_score;
-  hi_score_text.setString(s.str());
+    Text hi_score_text(font);
+    hi_score_text.setCharacterSize(55);
+    hi_score_text.setFillColor(Color::White);
+    hi_score_text.setPosition(scaling(window, 1400, 0));
+    std::stringstream s;
+    s << "Hight score: " << hi_score;
+    hi_score_text.setString(s.str());
 
-  Text zombie_remaining_text(font);
- zombie_remaining_text.setCharacterSize(55);
- zombie_remaining_text.setFillColor(Color::White);
- zombie_remaining_text.setPosition(scaling(window, 1500, 980));
- zombie_remaining_text.setString("Zombies: 100");
+    Text zombie_remaining_text(font);
+    zombie_remaining_text.setCharacterSize(55);
+    zombie_remaining_text.setFillColor(Color::White);
+    zombie_remaining_text.setPosition(scaling(window, 1500, 980));
+    zombie_remaining_text.setString("Zombies: 100");
 
- //wave text
- int wave{ 1 };
- Text wave_num_text(font);
-  wave_num_text.setCharacterSize(55);
-  wave_num_text.setFillColor(Color::White);
-  wave_num_text.setPosition(scaling(window, 1250, 980));
-  wave_num_text.setString("Wave: 0");
+    //wave text
+    int wave{ 1 };
+    Text wave_num_text(font);
+    wave_num_text.setCharacterSize(55);
+    wave_num_text.setFillColor(Color::White);
+    wave_num_text.setPosition(scaling(window, 1250, 980));
+    wave_num_text.setString("Wave: 0");
 
-  //HP bar
-  RectangleShape health_bar;
-  health_bar.setFillColor(Color::Red);
-  
+    //HP bar
+    RectangleShape health_bar;
+    health_bar.setFillColor(Color::Red);
 
-  health_bar.setPosition(scaling(window, 450, 980));
-  
 
-  //update hud
-  int frames_since_last_hud_update{ 0 };
-  int fps_mfi{ 1000 };
-  
-  //sounds
-  SoundBuffer hit_bufer;
-  hit_bufer.loadFromFile("sounds/hit.wav");
-  Sound hit(hit_bufer);
+    health_bar.setPosition(scaling(window, 450, 980));
 
-  SoundBuffer splat_buffer;
-  splat_buffer.loadFromFile("sounds/splat.wav");
-  Sound splat(splat_buffer);
 
-  SoundBuffer shoot_buffer;
-  shoot_buffer.loadFromFile("sounds/shoot.wav");
-  Sound shoot(shoot_buffer);
+    //update hud
+    int frames_since_last_hud_update{ 0 };
+    int fps_mfi{ 1000 };
 
-  SoundBuffer reload_buffer;
-  reload_buffer.loadFromFile("sounds/reload.wav");
-  Sound reload(reload_buffer);
+    //sounds
+    SoundBuffer hit_bufer;
+    hit_bufer.loadFromFile("sounds/hit.wav");
+    Sound hit(hit_bufer);
 
-  SoundBuffer reload_failed_buffer;
-  reload_failed_buffer.loadFromFile("sounds/reload_failed.wav");
-  Sound reload_fail(reload_failed_buffer);
+    SoundBuffer splat_buffer;
+    splat_buffer.loadFromFile("sounds/splat.wav");
+    Sound splat(splat_buffer);
 
-  SoundBuffer level_up_buffer;
-  level_up_buffer.loadFromFile("sounds/powerup.wav");
-  Sound level_up(level_up_buffer);
+    SoundBuffer shoot_buffer;
+    shoot_buffer.loadFromFile("sounds/shoot.wav");
+    Sound shoot(shoot_buffer);
 
-  SoundBuffer pickup_buffer;
-  pickup_buffer.loadFromFile("sounds/pickup.wav");
-  Sound pickup(pickup_buffer);
+    SoundBuffer reload_buffer;
+    reload_buffer.loadFromFile("sounds/reload.wav");
+    Sound reload(reload_buffer);
+
+    SoundBuffer reload_failed_buffer;
+    reload_failed_buffer.loadFromFile("sounds/reload_failed.wav");
+    Sound reload_fail(reload_failed_buffer);
+
+    SoundBuffer level_up_buffer;
+    level_up_buffer.loadFromFile("sounds/powerup.wav");
+    Sound level_up(level_up_buffer);
+
+    SoundBuffer pickup_buffer;
+    pickup_buffer.loadFromFile("sounds/pickup.wav");
+    Sound pickup(pickup_buffer);
 
 
 
@@ -246,7 +241,7 @@ int main()
                 {
                     w_pressed = true;
                     player.move_up();
-                    
+
                 }
                 if (key_pressed->scancode == Keyboard::Scancode::S)
                 {
@@ -283,7 +278,7 @@ int main()
                         reload_fail.play();
                     }
                 }
-               
+
             }
 
             else if (const auto* key_released = event->getIf<Event::KeyReleased>())
@@ -329,12 +324,12 @@ int main()
 
             if (const auto* key_pressed = event->getIf<Event::KeyPressed>())
             {
-                if (state == State::GAME_OVER&& key_pressed->scancode == Keyboard::Scancode::Enter)
+                if (state == State::GAME_OVER && key_pressed->scancode == Keyboard::Scancode::Enter)
                 {
-                   
+
                     state = State::PLAYING;
                 }
-                else if (state == State::PLAYING&& key_pressed->scancode == Keyboard::Scancode::Enter)
+                else if (state == State::PLAYING && key_pressed->scancode == Keyboard::Scancode::Enter)
                 {
                     state = State::PAUSED;
                 }
@@ -342,7 +337,7 @@ int main()
                 {
                     state = State::PLAYING;
                 }
-               
+
             }
         }
         //menu
@@ -402,7 +397,7 @@ int main()
         }
         if (state == State::PAUSED)
         {
-           
+
             window.draw(pause_text);
             window.display();
         }
@@ -572,7 +567,7 @@ int main()
                 frames_since_last_hud_update = 0;
             }
 
-            
+
             window.clear();
             window.setView(main_view);
             window.draw(background, &background_texture);
@@ -610,8 +605,17 @@ int main()
 
             window.display();
         }
-        
+
     }
     delete[] zombies;
     return 0;
+}
+
+Vector2f scaling(RenderWindow& window, float pos_x, float pos_y)
+{
+    Vector2u window_size = window.getSize();
+    float scale_x = static_cast<float>(window_size.x) / 1920.0f;
+    float scale_y = static_cast<float>(window_size.y) / 1080.0f;
+
+    return { pos_x * scale_x, pos_y * scale_y };
 }

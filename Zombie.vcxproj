@@ -111,12 +111,12 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\VS\libs\SFML\include;F:\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>F:\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\VS\libs\SFML\lib;F:\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>F:\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib;sfml-audio-d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Run\Update.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CreateBackground.cpp" />
     <ClCompile Include="create_zombies.cpp" />
@@ -149,8 +150,11 @@
     <ClCompile Include="ZombieGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Run\Update.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="LevelUpdate.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="SoundEngine.h" />
     <ClInclude Include="TextureHolder.h" />
     <ClInclude Include="Zombie.h" />
     <ClInclude Include="Player.h" />
