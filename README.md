@@ -1,1 +1,1 @@
-![alt text]([Image/1.jpg](1.jpg)
+![alt text]([Image/1.jpg](pic/1.jpg)
