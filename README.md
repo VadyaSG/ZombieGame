@@ -1,1 +1,1 @@
-![alt text]([Image/1.jpg](https://github.com/VadyaSG/ZombieGame/blob/master/pic/1.jpg)
+![alt text]([Image/1.jpg](1.jpg)
