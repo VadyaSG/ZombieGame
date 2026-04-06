@@ -8,9 +8,9 @@ private:
 	const float bloater_speed{ 44 };
 	const float chaser_speed{ 90 };
 	const float crawler_speed{ 25 };
-	const float  bloater_hp{ 1 };
+	const float  bloater_hp{ 2 };
 	const float	 chaser_hp{ 1 };
-	const float	 crawler_hp{ 1 };
+	const float	 crawler_hp{ 4 };
 	const int max_varriance{ 35 };
 	const int offset{ 101 - max_varriance };
 	Vector2f z_position;
